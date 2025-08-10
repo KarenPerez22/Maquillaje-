@@ -1,13 +1,5 @@
 import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Search, Star, Filter } from "lucide-react";
-
-// MakeupSafetyGuide.jsx
-// Single-file React component ready to drop into a project that uses TailwindCSS + Framer Motion.
-// - Pastel purple theme
-// - Sections: hero, videos (dermatologists / testimonies / tips), recommendations by skin type with prices
-// - Sample data provided; replace IDs/links with real YouTube/video links
-// - Export default component
 
 export default function MakeupSafetyGuide() {
   const [tab, setTab] = useState("dermatologists");
@@ -56,152 +48,71 @@ export default function MakeupSafetyGuide() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#faf5ff] to-[#f6f0fb] text-gray-900 p-6 md:p-12">
-      <header className="max-w-6xl mx-auto">
-        <nav className="flex items-center justify-between">
-          <h1 className="text-2xl md:text-3xl font-extrabold text-indigo-700">Evita daños en la piel</h1>
-          <div className="hidden md:flex items-center gap-4">
-            <button className="px-4 py-2 rounded-lg bg-white/80 shadow-sm text-sm">Acerca</button>
-            <button className="px-4 py-2 rounded-lg bg-white/80 shadow-sm text-sm">Contacto</button>
-          </div>
-        </nav>
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.08 }}
-          className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-start"
-        >
-          <div className="md:col-span-2 bg-white/60 p-6 rounded-2xl shadow-md">
-            <h2 className="text-xl font-bold text-indigo-800">Por qué usar productos certificados</h2>
-            <p className="mt-2 text-sm text-gray-700">Los productos sin certificación pueden contener impurezas, conservantes no aprobados o contaminantes que provocan alergias, irritación o daños a largo plazo. Aquí encontrarás videos de dermatólogos, testimonios reales y recomendaciones según tu tipo de piel.</p>
-            <div className="flex gap-3 mt-4 flex-wrap">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-sm">✅ Productos certificados</span>
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-sm">📺 Videos informativos</span>
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-50 text-pink-700 text-sm">💬 Testimonios reales</span>
-            </div>
-          </div>
-
-          <aside className="bg-white/70 p-4 rounded-2xl shadow-sm">
-            <h3 className="text-sm font-semibold text-indigo-700">Filtrar por tipo de piel</h3>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {skinTypes.map((s) => (
-                <button key={s.id} onClick={() => setSkinFilter(s.id)} className={`px-3 py-1 rounded-full text-sm ${skinFilter === s.id ? "bg-indigo-700 text-white" : "bg-white/50 text-indigo-700"}`}>
-                  {s.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="mt-4">
-              <label className="text-xs text-gray-600">Buscar producto</label>
-              <div className="mt-2 flex items-center gap-2">
-                <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="ej. Base, Dermacare" className="flex-1 px-3 py-2 rounded-lg bg-white/60 text-sm outline-none" />
-                <button onClick={() => setQuery("")} className="px-3 py-2 rounded-lg bg-indigo-700 text-white text-sm">Limpiar</button>
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <label className="text-xs text-gray-600">Ordenar</label>
-              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="w-full mt-2 px-3 py-2 rounded-lg bg-white/60 text-sm">
-                <option value="priceAsc">Precio: bajo a alto</option>
-                <option value="priceDesc">Precio: alto a bajo</option>
-              </select>
-            </div>
-          </aside>
-        </motion.div>
+      <header className="max-w-6xl mx-auto mb-8">
+        <h1 className="text-3xl font-extrabold text-indigo-700 mb-4">Evita daños en la piel</h1>
+        <p className="text-sm text-gray-700 max-w-3xl">Los productos sin certificación pueden provocar alergias, irritación o daños a largo plazo. Aquí encontrarás videos de dermatólogos, testimonios reales y recomendaciones según tu tipo de piel.</p>
       </header>
 
-      <main className="max-w-6xl mx-auto mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <section className="lg:col-span-2 bg-white/60 p-6 rounded-2xl shadow-md">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-indigo-800">Videos</h3>
-            <div className="flex gap-2">
-              <button onClick={() => setTab("dermatologists")} className={`px-3 py-1 rounded-full text-sm ${tab === "dermatologists" ? "bg-indigo-700 text-white" : "bg-white/50 text-indigo-700"}`}>Dermatólogos</button>
-              <button onClick={() => setTab("testimonies")} className={`px-3 py-1 rounded-full text-sm ${tab === "testimonies" ? "bg-indigo-700 text-white" : "bg-white/50 text-indigo-700"}`}>Testimonios</button>
-              <button onClick={() => setTab("tips")} className={`px-3 py-1 rounded-full text-sm ${tab === "tips" ? "bg-indigo-700 text-white" : "bg-white/50 text-indigo-700"}`}>Tips</button>
+      <main className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <section className="lg:col-span-2 space-y-6">
+          <div className="bg-white/60 p-4 rounded-xl shadow-md">
+            <div className="flex gap-2 mb-4">
+              <button onClick={() => setTab("dermatologists")} className={tab === "dermatologists" ? "bg-indigo-700 text-white px-3 py-1 rounded-full" : "bg-white/50 text-indigo-700 px-3 py-1 rounded-full"}>Dermatólogos</button>
+              <button onClick={() => setTab("testimonies")} className={tab === "testimonies" ? "bg-indigo-700 text-white px-3 py-1 rounded-full" : "bg-white/50 text-indigo-700 px-3 py-1 rounded-full"}>Testimonios</button>
+              <button onClick={() => setTab("tips")} className={tab === "tips" ? "bg-indigo-700 text-white px-3 py-1 rounded-full" : "bg-white/50 text-indigo-700 px-3 py-1 rounded-full"}>Tips</button>
             </div>
-          </div>
-
-          <div className="mt-4 space-y-6">
-            {tab === "dermatologists" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {videoData.dermatologists.map((v) => (
-                  <article key={v.id} className="bg-white rounded-xl overflow-hidden shadow-sm">
-                    <div className="aspect-video">
-                      <iframe className="w-full h-full" src={v.src} title={v.title} frameBorder="0" allowFullScreen></iframe>
-                    </div>
-                    <div className="p-3">
-                      <h4 className="font-semibold text-sm text-indigo-800">{v.title}</h4>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
-
-            {tab === "testimonies" && (
-              <div className="space-y-4">
-                {videoData.testimonies.map((t) => (
-                  <article key={t.id} className="bg-white rounded-xl overflow-hidden shadow-sm flex flex-col md:flex-row">
-                    <div className="md:w-1/2 aspect-video">
-                      <iframe className="w-full h-full" src={t.src} title={t.name} frameBorder="0" allowFullScreen></iframe>
-                    </div>
-                    <div className="p-4 md:w-1/2">
-                      <h4 className="font-semibold text-indigo-800">{t.name}</h4>
-                      <p className="text-sm text-gray-700 mt-2">{t.summary}</p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
-
-            {tab === "tips" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {videoData.tips.map((p) => (
-                  <article key={p.id} className="bg-white rounded-xl overflow-hidden shadow-sm">
-                    <div className="aspect-video">
-                      <iframe className="w-full h-full" src={p.src} title={p.title} frameBorder="0" allowFullScreen></iframe>
-                    </div>
-                    <div className="p-3">
-                      <h4 className="font-semibold text-sm text-indigo-800">{p.title}</h4>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {videoData[tab].map((v) => (
+                <div key={v.id} className="bg-white rounded-xl overflow-hidden shadow-sm">
+                  <div className="aspect-video">
+                    <iframe className="w-full h-full" src={v.src} title={v.title || v.name} frameBorder="0" allowFullScreen></iframe>
+                  </div>
+                  <div className="p-3">
+                    <h4 className="font-semibold text-sm text-indigo-800">{v.title || v.name}</h4>
+                    {v.summary && <p className="text-xs text-gray-700 mt-1">{v.summary}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
-        <aside className="bg-white/60 p-6 rounded-2xl shadow-md">
-          <h3 className="text-lg font-semibold text-indigo-800 flex items-center gap-2">Recomendaciones <span className="text-sm text-gray-500">(con precios)</span></h3>
-
-          <div className="mt-4 space-y-3">
+        <aside className="space-y-6">
+          <div className="bg-white/70 p-4 rounded-xl shadow-sm">
+            <h3 className="text-sm font-semibold text-indigo-700 mb-3">Filtrar por tipo de piel</h3>
+            <div className="flex flex-wrap gap-2 mb-4">
+              {skinTypes.map((s) => (
+                <button key={s.id} onClick={() => setSkinFilter(s.id)} className={skinFilter === s.id ? "bg-indigo-700 text-white px-3 py-1 rounded-full" : "bg-white/50 text-indigo-700 px-3 py-1 rounded-full"}>{s.label}</button>
+              ))}
+            </div>
+            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Buscar producto" className="w-full px-3 py-2 mb-3 rounded-lg bg-white/60 text-sm outline-none" />
+            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="w-full px-3 py-2 rounded-lg bg-white/60 text-sm">
+              <option value="priceAsc">Precio: bajo a alto</option>
+              <option value="priceDesc">Precio: alto a bajo</option>
+            </select>
+          </div>
+          <div className="bg-white/60 p-4 rounded-xl shadow-md">
+            <h3 className="text-lg font-semibold text-indigo-800 mb-4">Recomendaciones</h3>
             {filteredRecommendations.map((prod) => (
-              <motion.div whileHover={{ scale: 1.02 }} key={prod.id} className={`p-3 rounded-xl flex items-center justify-between ${prod.certified ? "border-l-4 border-green-400" : "border-l-4 border-red-300"} bg-white/80` }>
+              <motion.div whileHover={{ scale: 1.02 }} key={prod.id} className={`p-3 rounded-xl mb-3 flex items-center justify-between ${prod.certified ? "border-l-4 border-green-400" : "border-l-4 border-red-300"} bg-white/80` }>
                 <div>
-                  <div className="flex items-center gap-2">
-                    <h4 className="font-semibold text-sm text-indigo-800">{prod.name}</h4>
-                    {prod.certified ? <span className="text-xs px-2 py-0.5 rounded-full bg-green-50 text-green-700">Certificado</span> : <span className="text-xs px-2 py-0.5 rounded-full bg-red-50 text-red-700">Sin cert.</span>}
-                  </div>
-                  <p className="text-xs text-gray-600 mt-1">Marca: {prod.brand}</p>
+                  <h4 className="font-semibold text-sm text-indigo-800">{prod.name}</h4>
+                  <p className="text-xs text-gray-600">Marca: {prod.brand}</p>
                   <p className="text-xs text-gray-600">Piel: {prod.skin.join(", ")}</p>
                 </div>
                 <div className="text-right">
                   <div className="font-semibold">${prod.price.toFixed(2)}</div>
-                  <div className="text-xs text-gray-500">IVA incluido</div>
                 </div>
               </motion.div>
             ))}
-
-            {filteredRecommendations.length === 0 && <div className="text-sm text-gray-600">No se encontraron productos con esos filtros.</div>}
-          </div>
-
-          <div className="mt-6 text-xs text-gray-600">
-            <strong>Nota:</strong> Recomendamos comprar productos con certificaciones visibles en su empaque o ficha técnica. Evita ofertas que parezcan excesivamente baratas: pueden ser falsificaciones.
           </div>
         </aside>
       </main>
 
       <footer className="max-w-6xl mx-auto mt-8 text-center text-sm text-gray-600">
-        <p>Proyecto educativo — No sustituye la opinión médica. Consulta siempre con un especialista.</p>
+        <p>Proyecto educativo — Consulta siempre con un especialista.</p>
       </footer>
     </div>
   );
 }
++
