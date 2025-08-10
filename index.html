@@ -1,113 +1,81 @@
-import React, { useState } from "react";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Evita daños en la piel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-purple-100 text-gray-800 font-sans">
 
-export default function MakeupSafetyPage() {
-  const [skinType, setSkinType] = useState("");
-  const recommendations = {
-    seca: [
-      { name: "Base Hidratante Premium", price: "$25" },
-      { name: "Polvo Mineral Suave", price: "$18" },
-    ],
-    grasa: [
-      { name: "Base Matte Control", price: "$28" },
-      { name: "Polvo Oil-Free", price: "$20" },
-    ],
-    mixta: [
-      { name: "Base Equilibrante", price: "$26" },
-      { name: "Polvo Compacto Ligero", price: "$19" },
-    ],
-  };
+  <!-- Encabezado -->
+  <header class="bg-purple-300 p-6 text-center rounded-b-lg shadow-lg">
+    <h1 class="text-3xl font-bold">Evita daños en la piel</h1>
+    <p class="text-lg">Usa siempre maquillaje certificado para cuidar tu salud</p>
+  </header>
 
-  return (
-    <div className="min-h-screen bg-purple-100 p-6 font-sans">
-      <header className="bg-purple-300 p-4 rounded-lg shadow-lg text-center mb-6">
-        <h1 className="text-3xl font-bold text-white">
-          Evita daños en la piel: Usa maquillaje certificado
-        </h1>
-        <p className="text-white">
-          Información, testimonios y tips para un maquillaje seguro
-        </p>
-      </header>
+  <main class="max-w-6xl mx-auto mt-8 p-4 grid grid-cols-1 md:grid-cols-2 gap-8">
 
-      <main className="grid md:grid-cols-3 gap-6">
-        {/* Videos informativos */}
-        <section className="md:col-span-2 space-y-6">
-          <div className="bg-white rounded-lg shadow-lg p-4">
-            <h2 className="text-xl font-semibold text-purple-700 mb-3">
-              Videos de Dermatólogos
-            </h2>
-            <iframe
-              className="w-full h-64 rounded-lg"
-              src="https://www.youtube.com/embed/VIDEO_ID_1"
-              title="Video dermatólogo"
-              allowFullScreen
-            ></iframe>
-          </div>
+    <!-- Videos de Dermatólogos -->
+    <section class="bg-white rounded-xl shadow-lg p-6">
+      <h2 class="text-xl font-semibold mb-4 text-purple-700">Videos de Dermatólogos</h2>
+      <iframe class="w-full h-64 rounded-lg" src="https://www.youtube.com/embed/VIDEO_ID_1" title="Video dermatólogo"></iframe>
+      <iframe class="w-full h-64 rounded-lg mt-4" src="https://www.youtube.com/embed/VIDEO_ID_2" title="Video dermatólogo"></iframe>
+    </section>
 
-          <div className="bg-white rounded-lg shadow-lg p-4">
-            <h2 className="text-xl font-semibold text-purple-700 mb-3">
-              Testimonios Reales
-            </h2>
-            <iframe
-              className="w-full h-64 rounded-lg"
-              src="https://www.youtube.com/embed/VIDEO_ID_2"
-              title="Testimonio"
-              allowFullScreen
-            ></iframe>
-          </div>
+    <!-- Testimonios Reales -->
+    <section class="bg-white rounded-xl shadow-lg p-6">
+      <h2 class="text-xl font-semibold mb-4 text-purple-700">Testimonios Reales</h2>
+      <iframe class="w-full h-64 rounded-lg" src="https://www.youtube.com/embed/VIDEO_ID_3" title="Testimonio"></iframe>
+      <iframe class="w-full h-64 rounded-lg mt-4" src="https://www.youtube.com/embed/VIDEO_ID_4" title="Testimonio"></iframe>
+    </section>
 
-          <div className="bg-white rounded-lg shadow-lg p-4">
-            <h2 className="text-xl font-semibold text-purple-700 mb-3">
-              Tips de Maquillaje Seguro
-            </h2>
-            <iframe
-              className="w-full h-64 rounded-lg"
-              src="https://www.youtube.com/embed/VIDEO_ID_3"
-              title="Tips maquillaje"
-              allowFullScreen
-            ></iframe>
-          </div>
-        </section>
+    <!-- Tips de Maquillaje -->
+    <section class="bg-white rounded-xl shadow-lg p-6 md:col-span-2">
+      <h2 class="text-xl font-semibold mb-4 text-purple-700">Tips de Maquillaje</h2>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>Usa brochas limpias para evitar bacterias.</li>
+        <li>Elige productos con fecha de caducidad visible.</li>
+        <li>Retira el maquillaje antes de dormir.</li>
+      </ul>
+    </section>
 
-        {/* Recomendaciones */}
-        <aside className="bg-white rounded-lg shadow-lg p-4">
-          <h2 className="text-xl font-semibold text-purple-700 mb-4">
-            Recomendaciones según tu piel
-          </h2>
-          <label className="block mb-2 text-purple-600">
-            Tipo de piel:
-            <select
-              className="block w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring focus:ring-purple-300"
-              value={skinType}
-              onChange={(e) => setSkinType(e.target.value)}
-            >
-              <option value="">Selecciona...</option>
-              <option value="seca">Seca</option>
-              <option value="grasa">Grasa</option>
-              <option value="mixta">Mixta</option>
-            </select>
-          </label>
+    <!-- Recomendaciones según tipo de piel -->
+    <section class="bg-white rounded-xl shadow-lg p-6 md:col-span-2">
+      <h2 class="text-xl font-semibold mb-4 text-purple-700">Recomendaciones según tipo de piel</h2>
+      <table class="w-full border-collapse">
+        <thead>
+          <tr class="bg-purple-200">
+            <th class="border p-2">Tipo de Piel</th>
+            <th class="border p-2">Producto Recomendado</th>
+            <th class="border p-2">Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border p-2">Grasa</td>
+            <td class="border p-2">Base Oil-Free Certificada</td>
+            <td class="border p-2">$15</td>
+          </tr>
+          <tr>
+            <td class="border p-2">Seca</td>
+            <td class="border p-2">Hidratante con Vitamina E</td>
+            <td class="border p-2">$18</td>
+          </tr>
+          <tr>
+            <td class="border p-2">Mixta</td>
+            <td class="border p-2">Polvo Mineral Hipoalergénico</td>
+            <td class="border p-2">$20</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-          {skinType && (
-            <ul className="mt-4 space-y-2">
-              {recommendations[skinType].map((item, index) => (
-                <li
-                  key={index}
-                  className="flex justify-between p-2 bg-purple-50 rounded-lg"
-                >
-                  <span>{item.name}</span>
-                  <span className="font-bold text-purple-700">
-                    {item.price}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </aside>
-      </main>
+  </main>
 
-      <footer className="mt-6 text-center text-purple-600">
-        © 2025 Maquillaje Seguro. Todos los derechos reservados.
-      </footer>
-    </div>
-  );
-}
+  <footer class="bg-purple-300 mt-8 p-4 text-center rounded-t-lg shadow-lg">
+    <p>&copy; 2025 Cuida tu piel - Todos los derechos reservados</p>
+  </footer>
+
+</body>
+</html>
