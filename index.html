@@ -1,118 +1,113 @@
-import React, { useState, useMemo } from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
 
-export default function MakeupSafetyGuide() {
-  const [tab, setTab] = useState("dermatologists");
-  const [skinFilter, setSkinFilter] = useState("all");
-  const [query, setQuery] = useState("");
-  const [sortBy, setSortBy] = useState("priceAsc");
-
-  const videoData = {
-    dermatologists: [
-      { id: "d1", title: "Cuida tu piel: consejos de dermatólogo", src: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-      { id: "d2", title: "Productos no certificados: riesgos", src: "https://www.youtube.com/embed/9bZkp7q19f0" },
+export default function MakeupSafetyPage() {
+  const [skinType, setSkinType] = useState("");
+  const recommendations = {
+    seca: [
+      { name: "Base Hidratante Premium", price: "$25" },
+      { name: "Polvo Mineral Suave", price: "$18" },
     ],
-    testimonies: [
-      { id: "t1", name: "María — Quito", src: "https://www.youtube.com/embed/V-_O7nl0Ii0", summary: "Reacción alérgica por producto no certificado" },
-      { id: "t2", name: "Lucía — Guayaquil", src: "https://www.youtube.com/embed/3JZ_D3ELwOQ", summary: "Por qué ahora usa maquillaje certificado" },
+    grasa: [
+      { name: "Base Matte Control", price: "$28" },
+      { name: "Polvo Oil-Free", price: "$20" },
     ],
-    tips: [
-      { id: "p1", title: "Tips para maquillar piel sensible", src: "https://www.youtube.com/embed/oHg5SJYRHA0" },
-      { id: "p2", title: "Base perfecta según tu tono", src: "https://www.youtube.com/embed/tVj0ZTS4WF4" },
+    mixta: [
+      { name: "Base Equilibrante", price: "$26" },
+      { name: "Polvo Compacto Ligero", price: "$19" },
     ],
   };
 
-  const recommendations = [
-    { id: "prod1", name: "Base Hidratante Certificada", skin: ["dry", "sensitive"], price: 18.99, brand: "Dermacare", certified: true },
-    { id: "prod2", name: "Polvo Compacto", skin: ["oily", "combination"], price: 9.5, brand: "PureFace", certified: true },
-    { id: "prod3", name: "Labial Nutritivo (no certificado)", skin: ["all"], price: 3.99, brand: "LocalMakeups", certified: false },
-    { id: "prod4", name: "Protector Solar Facial", skin: ["all"], price: 12.0, brand: "SunShield", certified: true },
-  ];
-
-  const filteredRecommendations = useMemo(() => {
-    let arr = recommendations.filter((p) => p.name.toLowerCase().includes(query.toLowerCase()) || p.brand.toLowerCase().includes(query.toLowerCase()));
-    if (skinFilter !== "all") {
-      arr = arr.filter((p) => p.skin.includes(skinFilter) || p.skin.includes("all"));
-    }
-    arr = arr.sort((a, b) => (sortBy === "priceAsc" ? a.price - b.price : b.price - a.price));
-    return arr;
-  }, [query, skinFilter, sortBy]);
-
-  const skinTypes = [
-    { id: "all", label: "Todos" },
-    { id: "oily", label: "Grasa" },
-    { id: "dry", label: "Seca" },
-    { id: "combination", label: "Mixta" },
-    { id: "sensitive", label: "Sensible" },
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#faf5ff] to-[#f6f0fb] text-gray-900 p-6 md:p-12">
-      <header className="max-w-6xl mx-auto mb-8">
-        <h1 className="text-3xl font-extrabold text-indigo-700 mb-4">Evita daños en la piel</h1>
-        <p className="text-sm text-gray-700 max-w-3xl">Los productos sin certificación pueden provocar alergias, irritación o daños a largo plazo. Aquí encontrarás videos de dermatólogos, testimonios reales y recomendaciones según tu tipo de piel.</p>
+    <div className="min-h-screen bg-purple-100 p-6 font-sans">
+      <header className="bg-purple-300 p-4 rounded-lg shadow-lg text-center mb-6">
+        <h1 className="text-3xl font-bold text-white">
+          Evita daños en la piel: Usa maquillaje certificado
+        </h1>
+        <p className="text-white">
+          Información, testimonios y tips para un maquillaje seguro
+        </p>
       </header>
 
-      <main className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <section className="lg:col-span-2 space-y-6">
-          <div className="bg-white/60 p-4 rounded-xl shadow-md">
-            <div className="flex gap-2 mb-4">
-              <button onClick={() => setTab("dermatologists")} className={tab === "dermatologists" ? "bg-indigo-700 text-white px-3 py-1 rounded-full" : "bg-white/50 text-indigo-700 px-3 py-1 rounded-full"}>Dermatólogos</button>
-              <button onClick={() => setTab("testimonies")} className={tab === "testimonies" ? "bg-indigo-700 text-white px-3 py-1 rounded-full" : "bg-white/50 text-indigo-700 px-3 py-1 rounded-full"}>Testimonios</button>
-              <button onClick={() => setTab("tips")} className={tab === "tips" ? "bg-indigo-700 text-white px-3 py-1 rounded-full" : "bg-white/50 text-indigo-700 px-3 py-1 rounded-full"}>Tips</button>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {videoData[tab].map((v) => (
-                <div key={v.id} className="bg-white rounded-xl overflow-hidden shadow-sm">
-                  <div className="aspect-video">
-                    <iframe className="w-full h-full" src={v.src} title={v.title || v.name} frameBorder="0" allowFullScreen></iframe>
-                  </div>
-                  <div className="p-3">
-                    <h4 className="font-semibold text-sm text-indigo-800">{v.title || v.name}</h4>
-                    {v.summary && <p className="text-xs text-gray-700 mt-1">{v.summary}</p>}
-                  </div>
-                </div>
-              ))}
-            </div>
+      <main className="grid md:grid-cols-3 gap-6">
+        {/* Videos informativos */}
+        <section className="md:col-span-2 space-y-6">
+          <div className="bg-white rounded-lg shadow-lg p-4">
+            <h2 className="text-xl font-semibold text-purple-700 mb-3">
+              Videos de Dermatólogos
+            </h2>
+            <iframe
+              className="w-full h-64 rounded-lg"
+              src="https://www.youtube.com/embed/VIDEO_ID_1"
+              title="Video dermatólogo"
+              allowFullScreen
+            ></iframe>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-lg p-4">
+            <h2 className="text-xl font-semibold text-purple-700 mb-3">
+              Testimonios Reales
+            </h2>
+            <iframe
+              className="w-full h-64 rounded-lg"
+              src="https://www.youtube.com/embed/VIDEO_ID_2"
+              title="Testimonio"
+              allowFullScreen
+            ></iframe>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-lg p-4">
+            <h2 className="text-xl font-semibold text-purple-700 mb-3">
+              Tips de Maquillaje Seguro
+            </h2>
+            <iframe
+              className="w-full h-64 rounded-lg"
+              src="https://www.youtube.com/embed/VIDEO_ID_3"
+              title="Tips maquillaje"
+              allowFullScreen
+            ></iframe>
           </div>
         </section>
 
-        <aside className="space-y-6">
-          <div className="bg-white/70 p-4 rounded-xl shadow-sm">
-            <h3 className="text-sm font-semibold text-indigo-700 mb-3">Filtrar por tipo de piel</h3>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {skinTypes.map((s) => (
-                <button key={s.id} onClick={() => setSkinFilter(s.id)} className={skinFilter === s.id ? "bg-indigo-700 text-white px-3 py-1 rounded-full" : "bg-white/50 text-indigo-700 px-3 py-1 rounded-full"}>{s.label}</button>
-              ))}
-            </div>
-            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Buscar producto" className="w-full px-3 py-2 mb-3 rounded-lg bg-white/60 text-sm outline-none" />
-            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="w-full px-3 py-2 rounded-lg bg-white/60 text-sm">
-              <option value="priceAsc">Precio: bajo a alto</option>
-              <option value="priceDesc">Precio: alto a bajo</option>
+        {/* Recomendaciones */}
+        <aside className="bg-white rounded-lg shadow-lg p-4">
+          <h2 className="text-xl font-semibold text-purple-700 mb-4">
+            Recomendaciones según tu piel
+          </h2>
+          <label className="block mb-2 text-purple-600">
+            Tipo de piel:
+            <select
+              className="block w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring focus:ring-purple-300"
+              value={skinType}
+              onChange={(e) => setSkinType(e.target.value)}
+            >
+              <option value="">Selecciona...</option>
+              <option value="seca">Seca</option>
+              <option value="grasa">Grasa</option>
+              <option value="mixta">Mixta</option>
             </select>
-          </div>
-          <div className="bg-white/60 p-4 rounded-xl shadow-md">
-            <h3 className="text-lg font-semibold text-indigo-800 mb-4">Recomendaciones</h3>
-            {filteredRecommendations.map((prod) => (
-              <motion.div whileHover={{ scale: 1.02 }} key={prod.id} className={`p-3 rounded-xl mb-3 flex items-center justify-between ${prod.certified ? "border-l-4 border-green-400" : "border-l-4 border-red-300"} bg-white/80` }>
-                <div>
-                  <h4 className="font-semibold text-sm text-indigo-800">{prod.name}</h4>
-                  <p className="text-xs text-gray-600">Marca: {prod.brand}</p>
-                  <p className="text-xs text-gray-600">Piel: {prod.skin.join(", ")}</p>
-                </div>
-                <div className="text-right">
-                  <div className="font-semibold">${prod.price.toFixed(2)}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          </label>
+
+          {skinType && (
+            <ul className="mt-4 space-y-2">
+              {recommendations[skinType].map((item, index) => (
+                <li
+                  key={index}
+                  className="flex justify-between p-2 bg-purple-50 rounded-lg"
+                >
+                  <span>{item.name}</span>
+                  <span className="font-bold text-purple-700">
+                    {item.price}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
         </aside>
       </main>
 
-      <footer className="max-w-6xl mx-auto mt-8 text-center text-sm text-gray-600">
-        <p>Proyecto educativo — Consulta siempre con un especialista.</p>
+      <footer className="mt-6 text-center text-purple-600">
+        © 2025 Maquillaje Seguro. Todos los derechos reservados.
       </footer>
     </div>
   );
 }
-+
